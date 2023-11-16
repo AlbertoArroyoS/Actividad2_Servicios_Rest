@@ -6,11 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import es.actividad2.unir.modelo.entidad.Libro;
-
+@Service
 public class ServicioProxyLibro {
 	
 	//La URL base del servicio REST de personas
