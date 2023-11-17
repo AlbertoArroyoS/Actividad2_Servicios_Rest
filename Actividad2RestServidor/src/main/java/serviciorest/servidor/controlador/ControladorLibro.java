@@ -50,11 +50,13 @@ public class ControladorLibro {
 	@PostMapping(path="libros",consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> altaLibro(@RequestBody Libro l) {
-		System.out.println("altaLibro: objeto libro: " + l);
+		
 		Libro libroNuevo = daoLibro.add(l);
 		if(libroNuevo != null) {
+			System.out.println("altaLibro: objeto libro: " + l);
 			return new ResponseEntity<Libro>(l,HttpStatus.OK);//200 OK
 		}else {
+			System.out.println("No se ha dado de alta el libro: " + l);
 			return new ResponseEntity<Libro>(HttpStatus.BAD_REQUEST);//404 NOT FOUND
 		}
 	}

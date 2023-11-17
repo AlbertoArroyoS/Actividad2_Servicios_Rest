@@ -37,8 +37,10 @@ public class DaoLibro {
 	
 	//1.Dar de alta un libro
 	public Libro add(Libro l) {
-		l.setId(contador++);
+		//si el nombre del libro no existe que se aquege a la lista
+		//compruebo con el metodo existeLibroConTitulo con el titulo del objeto
 		if (!existeLibroConTitulo(l.getTitulo())){
+			l.setId(contador++);
 			listaLibros.add(l);
 			return l;
 		}
