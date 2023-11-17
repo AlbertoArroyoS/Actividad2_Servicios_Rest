@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 //Javabeans o pojo
 
-@Component
+
 public class Libro {
 	private int id;
 	private String titulo;

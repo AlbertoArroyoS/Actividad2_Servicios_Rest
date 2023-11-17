@@ -51,8 +51,12 @@ public class ControladorLibro {
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> altaLibro(@RequestBody Libro l) {
 		System.out.println("altaLibro: objeto libro: " + l);
-		daoLibro.add(l);
-		return new ResponseEntity<Libro>(l,HttpStatus.CREATED);//201 CREATED
+		Libro libroNuevo = daoLibro.add(l);
+		if(libroNuevo != null) {
+			return new ResponseEntity<Libro>(l,HttpStatus.OK);//200 OK
+		}else {
+			return new ResponseEntity<Libro>(HttpStatus.BAD_REQUEST);//404 NOT FOUND
+		}
 	}
 	
 	//2.Dar de baja un libro por ID

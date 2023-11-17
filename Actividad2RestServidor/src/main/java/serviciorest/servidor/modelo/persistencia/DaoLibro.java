@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import serviciorest.servidor.modelo.entidad.Libro;
 
 
-
+@Component
 public class DaoLibro {
 	
 	public List<Libro> listaLibros;
-	public int contador=1;
+	public int contador;
 	
 	/**
 	 * Cuando se cree el objeto dentro del contexto de Spring, se ejecutara
@@ -34,10 +36,16 @@ public class DaoLibro {
 	}
 	
 	//1.Dar de alta un libro
-	public void add(Libro l) {
+	public Libro add(Libro l) {
 		l.setId(contador++);
-		listaLibros.add(l);
+		if (!existeLibroConTitulo(l.getTitulo())){
+			listaLibros.add(l);
+			return l;
+		}
+		return null;
+		
 	}
+		
 	
 	//2.Dar de baja un libro por ID
 	public Libro delete(int id) {
@@ -81,7 +89,19 @@ public class DaoLibro {
 	public List<Libro> list() {
 		return listaLibros;
 	}
-
+	
+	
+	// Método para comprobar si hay un libro con un título específico
+    public boolean existeLibroConTitulo(String tituloBuscado) {
+        for (Libro libro : listaLibros) {
+            if (libro.getTitulo().equalsIgnoreCase(tituloBuscado)) {
+                // Se encontró un libro con el mismo título
+                return true;
+            }
+        }
+        // No se encontró ningún libro con el mismo título
+        return false;
+    }
 
 	
 	
