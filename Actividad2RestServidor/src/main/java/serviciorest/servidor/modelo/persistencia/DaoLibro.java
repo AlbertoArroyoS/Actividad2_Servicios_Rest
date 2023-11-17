@@ -11,7 +11,7 @@ import serviciorest.servidor.modelo.entidad.Libro;
 public class DaoLibro {
 	
 	public List<Libro> listaLibros;
-	public int contador;
+	public int contador=1;
 	
 	/**
 	 * Cuando se cree el objeto dentro del contexto de Spring, se ejecutara
@@ -21,11 +21,11 @@ public class DaoLibro {
 	public DaoLibro() {
 		System.out.println("DaoPersona -> Creando la lista de personas!");
 		listaLibros = new ArrayList<Libro>();
-		Libro p1 = new Libro(contador++,"STEVE", "ROGERS", 39);//ID: 0
-		Libro p2 = new Libro(contador++,"HARRY", "POTTER", 19);//ID: 1
-		Libro p3 = new Libro(contador++,"CHIQUITO", "DE LA CALZADA", 79);//ID: 2
-		Libro p4 = new Libro(contador++,"BUD", "SPENCER", 85);//ID:3
-		Libro p5 = new Libro(contador++,"HARRY", "CALLAHAN", 87);//ID:4
+		Libro p1 = new Libro(contador++,"EL SEÑOR DE LOS ANILLOS", "MINOTAURO", 10);//ID: 0
+		Libro p2 = new Libro(contador++,"FRAY PERICO Y SU BORRICO","EDICIONES SM", 9);//ID: 1
+		Libro p3 = new Libro(contador++,"CEMENTERIO DE ANIMALES","DEBOLSILLO", 10);//ID: 2
+		Libro p4 = new Libro(contador++,"DON QUIJOTE DE LA MANCHA", "VICENS-VIVES", 10);//ID:3
+		Libro p5 = new Libro(contador++,"EL MONSTRUO DE COLORES", "FLAMBOYANT", 9);//ID:4
 		listaLibros.add(p1);
 		listaLibros.add(p2);
 		listaLibros.add(p3);
@@ -44,7 +44,7 @@ public class DaoLibro {
 		try {
 			return listaLibros.remove(id);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("delete -> Persona fuera de rango");
+			System.out.println("delete -> L fuera de rango");
 			return null;
 		}
 	}
@@ -70,7 +70,7 @@ public class DaoLibro {
 		try {
 			return listaLibros.get(id);
 		} catch (IndexOutOfBoundsException iobe) {
-			System.out.println("Persona fuera de rango");
+			System.out.println("Libro fuera de rango");
 			return null;
 		}
 	}
