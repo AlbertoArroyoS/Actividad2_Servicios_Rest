@@ -189,15 +189,32 @@ public class Actividad2Application implements CommandLineRunner{
 
 	private void darDeAltaLibro() {
 		leer.nextLine(); // Limpiar el búfer de nueva línea
-    	System.out.println("Introduzca titulo del libro");
-    	String titulo = leer.nextLine();
-    	System.out.println("Introduzca editorial del libro");
-    	String editorial = leer.nextLine();
-    	System.out.println("Introduzca valoracion del libro");
-    	int nota = leer.nextInt();
-    	Libro libro = new Libro(0, titulo.toUpperCase(),editorial.toUpperCase(),nota);
-    	spl.alta(libro);
-        System.out.println("run -> Persona dada de alta " + libro);
+	    System.out.println("Introduzca título del libro");
+	    String titulo = leer.nextLine();
+	    System.out.println("Introduzca editorial del libro");
+	    String editorial = leer.nextLine();
+	    int nota = 0;
+	    boolean entradaValida = false;
+
+	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
+	    while (!entradaValida) {
+	        try {
+	            System.out.println("Introduzca valoración del libro");
+	            nota = Integer.parseInt(leer.nextLine());
+	            
+	            if (nota >= 0 && nota <= 10) {
+	                entradaValida = true; // Si es un número válido, pasa a true
+	            } else {
+	                System.out.println("La valoración debe ser de 0 a 10.");
+	            }
+	        } catch (NumberFormatException e) {
+	            System.out.println("Entrada no válida. Debe ingresar un número entero.");
+	        }
+	    }
+
+	    Libro libro = new Libro(0, titulo.toUpperCase(), editorial.toUpperCase(), nota);
+	    spl.alta(libro);
+
         
     }
 
@@ -210,14 +227,31 @@ public class Actividad2Application implements CommandLineRunner{
 
     private void modificarLibro() {
     	System.out.println("Introduzca id del libro a modificar");
+
+    	
     	int id = leer.nextInt();
     	leer.nextLine();
     	System.out.println("Introduzca titulo del libro a modificar");
     	String titulo = leer.nextLine();
     	System.out.println("Introduzca editorial del libro a modificar");
     	String editorial = leer.nextLine();
-    	System.out.println("Introduzca valoracion del libro a modificar");
-    	int nota = leer.nextInt();
+    	int nota = 0;
+	    boolean entradaValida = false;
+	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
+	    while (!entradaValida) {
+	        try {
+	            System.out.println("Introduzca valoración del libro");
+	            nota = Integer.parseInt(leer.nextLine());
+	            
+	            if (nota >= 0 && nota <= 10) {
+	                entradaValida = true; // Si es un número válido, pasa a true
+	            } else {
+	                System.out.println("La valoración debe ser de 0 a 10.");
+	            }
+	        } catch (NumberFormatException e) {
+	            System.out.println("Entrada no válida. Debe ingresar un número entero.");
+	        }
+	    }
     	Libro libro = new Libro(id,titulo,editorial,nota);
     	boolean modificada = spl.modificar(libro);
     	System.out.println("run -> libro modificado? " + modificada);
