@@ -1,5 +1,6 @@
 package es.actividad2.unir;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,23 +196,46 @@ public class Actividad2Application implements CommandLineRunner{
     	System.out.println("Introduzca valoracion del libro");
     	int nota = leer.nextInt();
     	Libro libro = new Libro(0, titulo.toUpperCase(),editorial.toUpperCase(),nota);
-        spl.alta(libro);
+    	spl.alta(libro);
+        System.out.println("run -> Persona dada de alta " + libro);
+        
     }
 
     private void darDeBajaLibro() {
-        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.darDeBaja(id);
+    	System.out.println("Introduzca id del libro a borrar");
+    	int id = leer.nextInt();
+    	boolean borrada = spl.borrar(id);
+    	System.out.println("run -> Libro con id " + id +" borrada? " + borrada);
     }
 
     private void modificarLibro() {
-        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.modificar(libro);
+    	System.out.println("Introduzca id del libro a modificar");
+    	int id = leer.nextInt();
+    	leer.nextLine();
+    	System.out.println("Introduzca titulo del libro a modificar");
+    	String titulo = leer.nextLine();
+    	System.out.println("Introduzca editorial del libro a modificar");
+    	String editorial = leer.nextLine();
+    	System.out.println("Introduzca valoracion del libro a modificar");
+    	int nota = leer.nextInt();
+    	Libro libro = new Libro(id,titulo,editorial,nota);
+    	boolean modificada = spl.modificar(libro);
+    	System.out.println("run -> libro modificado? " + modificada);
     }
 
     private void obtenerLibroPorId() {
-        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.obtenerPorId(id);
+    	System.out.println("Introduzca id del libro a buscar");
+    	int id = leer.nextInt();
+    	Libro libro = spl.obtener(id);
+    	System.out.println("run -> Libro con id : " + id + ": " +libro);
     }
 
     private void listarTodosLosLibros() {
-        // Implementa la lógica para llamar a libroService.listarTodos();
+    	
+    	List<Libro> listaLibros = spl.listar(null);
+    	for (Libro libro : listaLibros){
+    		System.out.println(libro);		
+    	}
     }
 	
 
