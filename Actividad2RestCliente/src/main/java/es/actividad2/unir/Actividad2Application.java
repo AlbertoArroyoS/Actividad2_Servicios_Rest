@@ -195,7 +195,6 @@ public class Actividad2Application implements CommandLineRunner{
 	    String editorial = leer.nextLine();
 	    int nota = 0;
 	    boolean entradaValida = false;
-
 	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
 	    while (!entradaValida) {
 	        try {
@@ -219,18 +218,39 @@ public class Actividad2Application implements CommandLineRunner{
     }
 
     private void darDeBajaLibro() {
-    	System.out.println("Introduzca id del libro a borrar");
-    	int id = leer.nextInt();
+    	leer.nextLine();
+    	int id = 0;
+	    boolean entradaValida = false;
+	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
+	    while (!entradaValida) {
+	        try {
+	        	System.out.println("Introduzca id del libro a borrar");
+	            id = Integer.parseInt(leer.nextLine());
+	            entradaValida = true; // Si es un número válido, pasa a true
+	           
+	        } catch (NumberFormatException e) {
+	            System.out.println("Entrada no válida. Debe ingresar un número entero.");
+	        }
+	    }
     	boolean borrada = spl.borrar(id);
     	System.out.println("run -> Libro con id " + id +" borrada? " + borrada);
     }
 
     private void modificarLibro() {
-    	System.out.println("Introduzca id del libro a modificar");
-
-    	
-    	int id = leer.nextInt();
     	leer.nextLine();
+    	int id = 0;
+	    boolean entradaValidaId = false;
+	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
+	    while (!entradaValidaId) {
+	        try {
+	        	System.out.println("Introduzca id del libro a modificar");
+	            id = Integer.parseInt(leer.nextLine());
+	            entradaValidaId = true; // Si es un número válido, pasa a true
+	           
+	        } catch (NumberFormatException e) {
+	            System.out.println("Entrada no válida. Debe ingresar un número entero.");
+	        }
+	    }
     	System.out.println("Introduzca titulo del libro a modificar");
     	String titulo = leer.nextLine();
     	System.out.println("Introduzca editorial del libro a modificar");
@@ -257,9 +277,21 @@ public class Actividad2Application implements CommandLineRunner{
     	System.out.println("run -> libro modificado? " + modificada);
     }
 
-    private void obtenerLibroPorId() {
-    	System.out.println("Introduzca id del libro a buscar");
-    	int id = leer.nextInt();
+    private void obtenerLibroPorId() {	
+    	leer.nextLine();
+    	int id = 0;
+	    boolean entradaValidaId = false;
+	    // Bucle para comprobar si hemos metido un número y si está dentro del rango
+	    while (!entradaValidaId) {
+	        try {
+	        	System.out.println("Introduzca id del libro a buscar");
+	            id = Integer.parseInt(leer.nextLine());
+	            entradaValidaId = true; // Si es un número válido, pasa a true
+	           
+	        } catch (NumberFormatException e) {
+	            System.out.println("Entrada no válida. Debe ingresar un número entero.");
+	        }
+	    }
     	Libro libro = spl.obtener(id);
     	System.out.println("run -> Libro con id : " + id + ": " +libro);
     }
