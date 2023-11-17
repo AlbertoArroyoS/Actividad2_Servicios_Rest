@@ -15,7 +15,7 @@ import es.actividad2.unir.modelo.entidad.Libro;
 public class ServicioProxyLibro {
 	
 	//La URL base del servicio REST de personas
-	public static final String URL = "http://localhost:8080/personas/";
+	public static final String URL = "http://localhost:8080/libros/";
 	
 	//Inyectamos el objeto de tipo RestTemplate que nos ayudará
 	//a hacer las peticiones HTTP al servicio REST

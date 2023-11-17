@@ -1,5 +1,7 @@
 package es.actividad2.unir;
 
+import java.util.Scanner;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +11,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import es.actividad2.unir.modelo.entidad.Libro;
 import es.actividad2.unir.modelo.servicio.ServicioProxyLibro;
 import es.actividad2.unir.modelo.servicio.ServicioProxyMensaje;
 
@@ -29,6 +33,12 @@ public class Actividad2Application implements CommandLineRunner{
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
+	}
+	
+	//Para poder leer las opciones del menu	que estan en un metodo estatico
+	private static Scanner leer;
+	static {
+			leer = new Scanner(System.in);
 	}
 
 	public static void main(String[] args) {
@@ -105,7 +115,36 @@ public class Actividad2Application implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println("Bienvenido a la aplicación de gestión de libros");
+
+		int opcion=0;
+        do {
+        	opcion = menu();
+
+            switch (opcion) {
+                case 1:
+                    darDeAltaLibro();
+                    break;
+                case 2:
+                    darDeBajaLibro();
+                    break;
+                case 3:
+                    modificarLibro();
+                    break;
+                case 4:
+                    obtenerLibroPorId();
+                    break;
+                case 5:
+                    listarTodosLosLibros();
+                    break;
+                case 6:
+                    System.out.println("Saliendo de la aplicación.");
+                    pararAplicacion();
+                    break;
+                default:
+                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+            }
+        } while (opcion != 6);
 		
 	}
 	
@@ -115,5 +154,67 @@ public class Actividad2Application implements CommandLineRunner{
 		SpringApplication.exit(context, () -> 0);
 
 	}
+	private int menu() {
+		int opcion = 0;
+		System.out.println("----------------------------------------------------");
+		System.out.println("|                      MENU                        |");
+		System.out.println("----------------------------------------------------");
+        System.out.println("1. Dar de alta un libro");
+        System.out.println("2. Dar de baja un libro por ID");
+        System.out.println("3. Modificar un libro por ID");
+        System.out.println("4. Obtener un libro por ID");
+        System.out.println("5. Listar todos los libros");
+        System.out.println("6. Salir");
+		System.out.println("----------------------------------------------------");
+		System.out.println("Introduzca una opción del 1 al 6, si quiere salir 6");
+		System.out.println("----------------------------------------------------");
+		
+		try {
+			opcion = leer.nextInt();
+			
+		} catch (java.util.InputMismatchException e) {
+	        // Atrapar la excepción si se ingresa algo que no es un entero
+	        System.out.println("Entrada no válida. Ingrese un número entero.");
+	        leer.next(); // Limpiar el búfer de entrada para evitar un bucle infinito
+	    }
+		
+		if (opcion<1 || opcion > 6) {
+			System.out.println("OPCION INCORRECTA");
+		}
+		
+		return opcion;	
+
+    }
+
+	private void darDeAltaLibro() {
+		leer.nextLine(); // Limpiar el búfer de nueva línea
+    	System.out.println("Introduzca titulo del libro");
+    	String titulo = leer.nextLine();
+    	System.out.println("Introduzca editorial del libro");
+    	String editorial = leer.nextLine();
+    	System.out.println("Introduzca valoracion del libro");
+    	int nota = leer.nextInt();
+    	Libro libro = new Libro(0, titulo.toUpperCase(),editorial.toUpperCase(),nota);
+        spl.alta(libro);
+    }
+
+    private void darDeBajaLibro() {
+        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.darDeBaja(id);
+    }
+
+    private void modificarLibro() {
+        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.modificar(libro);
+    }
+
+    private void obtenerLibroPorId() {
+        // Implementa la lógica para solicitar datos al usuario y llamar a libroService.obtenerPorId(id);
+    }
+
+    private void listarTodosLosLibros() {
+        // Implementa la lógica para llamar a libroService.listarTodos();
+    }
+	
+
+    
 
 }
