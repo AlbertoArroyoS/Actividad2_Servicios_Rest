@@ -10,9 +10,9 @@ public class ControladorMensaje {
 	
 	@GetMapping(value = "mensaje")
 	public String obtenerMensaje() {
-		return "Esto es un mensaje de prueba";
+		return "Comunicacion con el servidor de Alberto ";
 	}
-
+	/*
 	@GetMapping(value = "mensajeHTML", produces = MediaType.TEXT_HTML_VALUE)
 	public String obtenerMensajeHTML() {
 		//Esta clase es muy buena para concatenar Strings
@@ -28,6 +28,7 @@ public class ControladorMensaje {
 		buffer.append("</html>");
 		
 		return buffer.toString();
-	}
+		
+	}*/
 
 }
