@@ -8,18 +8,22 @@ import org.springframework.stereotype.Component;
 
 import serviciorest.servidor.modelo.entidad.Libro;
 
-
+/**
+ * Componente de Spring que actúa como un Data Access Object (DAO) para la entidad Libro.
+ * Contiene operaciones CRUD básicas para manipular libros en una lista.
+ * 
+ * @author Alberto Arroyo Santofimia
+ * @version 1.0
+ */
 @Component
 public class DaoLibro {
 	
 	public List<Libro> listaLibros;
 	public int contador;
-	
 	/**
-	 * Cuando se cree el objeto dentro del contexto de Spring, se ejecutara
-	 * su constructor, que crearan los libros y las metera en una lista
-	 * para que puedan ser consumidas por nuestros clientes
-	 */
+    * Constructor de la clase DaoLibro.
+    * Crea la lista de libros e inicializa algunos libros de muestra.
+    */
 	public DaoLibro() {
 		System.out.println("DaoPersona -> Creando la lista de personas!");
 		listaLibros = new ArrayList<Libro>();
@@ -36,6 +40,12 @@ public class DaoLibro {
 	}
 	
 	//1.Dar de alta un libro
+	 /**
+     * Añade un nuevo libro a la lista.
+     *
+     * @param l El libro a añadir.
+     * @return El libro añadido, o null si ya existe un libro con el mismo título.
+     */
 	public Libro add(Libro l) {
 		//si el nombre del libro no existe que se aquege a la lista
 		//compruebo con el metodo existeLibroConTitulo con el titulo del objeto
@@ -50,6 +60,12 @@ public class DaoLibro {
 		
 	
 	//2.Dar de baja un libro por ID
+	/**
+     * Elimina un libro de la lista por su ID.
+     *
+     * @param id El ID del libro a eliminar.
+     * @return El libro eliminado, o null si el ID está fuera de rango.
+     */
 	public Libro delete(int id) {
 		try {
 			return listaLibros.remove(id);
@@ -60,6 +76,12 @@ public class DaoLibro {
 	}
 	
 	//3.Modificar un libro por ID
+	/**
+     * Modifica un libro de la lista por su ID.
+     *
+     * @param l El libro con los nuevos datos.
+     * @return El libro modificado, o null si el ID está fuera de rango.
+     */
 	public Libro update(Libro l) {
 		try {
 			Libro lAux = listaLibros.get(l.getId());
@@ -76,6 +98,12 @@ public class DaoLibro {
 	}
 	
 	//4.Obtener un libro por ID
+	/**
+     * Obtiene un libro de la lista por su ID.
+     *
+     * @param id El ID del libro a obtener.
+     * @return El libro encontrado, o null si el ID está fuera de rango.
+     */
 	public Libro get(int id) {
 		try {
 			return listaLibros.get(id);
@@ -88,12 +116,23 @@ public class DaoLibro {
 	
 	
 	//5.Listar todos los libros
+	/**
+     * Lista todos los libros en la lista.
+     *
+     * @return La lista de libros.
+     */
 	public List<Libro> list() {
 		return listaLibros;
 	}
 	
 	
 	// Método para comprobar si hay un libro con un título específico
+	 /**
+     * Comprueba si hay un libro con un título específico en la lista.
+     *
+     * @param tituloBuscado El título del libro a buscar.
+     * @return true si hay un libro con el mismo título, false en caso contrario.
+     */
     public boolean existeLibroConTitulo(String tituloBuscado) {
         for (Libro libro : listaLibros) {
             if (libro.getTitulo().equalsIgnoreCase(tituloBuscado)) {
@@ -104,9 +143,6 @@ public class DaoLibro {
         // No se encontró ningún libro con el mismo título
         return false;
     }
-
-	
-	
 
 
 }

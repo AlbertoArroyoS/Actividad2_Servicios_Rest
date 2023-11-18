@@ -2,11 +2,16 @@ package serviciorest.servidor.modelo.entidad;
 
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
 
 //Javabeans o pojo
 
-
+/**
+ * Clase que representa la entidad Libro.
+ * Esta clase sigue el patrón de diseño JavaBeans o POJO (Plain Old Java Object).
+ * 
+ * @author Alberto Arroyo Santofimia
+ * @version 1.0
+ */
 public class Libro {
 	private int id;
 	private String titulo;
