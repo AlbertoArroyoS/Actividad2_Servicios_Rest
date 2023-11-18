@@ -17,7 +17,7 @@ public class DaoLibro {
 	
 	/**
 	 * Cuando se cree el objeto dentro del contexto de Spring, se ejecutara
-	 * su constructor, que creara las personas y las metera en una lista
+	 * su constructor, que crearan los libros y las metera en una lista
 	 * para que puedan ser consumidas por nuestros clientes
 	 */
 	public DaoLibro() {

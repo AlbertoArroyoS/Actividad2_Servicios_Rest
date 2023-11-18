@@ -52,9 +52,9 @@ public class Actividad2Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("****** Arrancando el cliente REST ******");
-		//System.out.println("*************  MENSAJE *****************");
-		//String mensaje = spm.obtener("mensaje");
-		//System.out.println("run -> Mensaje: " + mensaje);
+		System.out.println("*************  MENSAJE *****************");
+		String mensaje = spm.obtener("mensaje");
+		System.out.println("run -> Mensaje: " + mensaje);
 		System.out.println("Bienvenido a la aplicación de gestión de libros");
 
 		int opcion=0;

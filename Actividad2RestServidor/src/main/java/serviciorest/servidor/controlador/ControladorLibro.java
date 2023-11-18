@@ -28,25 +28,12 @@ public class ControladorLibro {
 	private DaoLibro daoLibro;
 	
 	
+	
 	//1.Dar de alta un libro
 	//POST 
-	//En este caso vamos a dar de alta una persona, para ello usaremos
-	//el metodo POST, vamos a producir tambien JSON (produces) y el 
-	//formato que nos tiene que enviar el cliente tambien tiene que ser
-	//JSON (consumes). La persona nos tiene que llegar sin ID, ya que
-	//seremos nosotros quien le pongamos dicho ID.
-	
-	//Para obtener la persona que nos envie el cliente podemos usar
-	//la anotacion @RequestBody en un parametro de entrada de tipo
-	//Persona. Spring se encargará de deserializar automaticamente
-	//el json.
-	
-	//En este caso devolveremos la persona creada (ya que seremos nosotros
-	//los que le asignemos el ID) y el codigo de respuesta 201 CREATED
-	
-	//La URL para acceder a este metodo sería: 
-	//"http://localhost:8080/personas" y el metodo a usar seria POST
+	//"http://localhost:8080/libros" y el metodo a usar seria POST
 	//Pasandole la persona sin el ID dentro del body del HTTP request
+	
 	@PostMapping(path="libros",consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> altaLibro(@RequestBody Libro l) {
@@ -66,10 +53,6 @@ public class ControladorLibro {
 	//DELETE
 	//Aqui vamos a borar una persona a traves de un ID que le pasemos en el
 	//PATH.
-	
-	//Si todo ha ido bien devolvemos el codigo de respuesta de 200 OK y
-	//devolvemos la persona que hemos borrado
-	
 	//La URL para acceder a este metodo sería: 
 	//"http://localhost:8080/personas/ID" y el metodo a usar seria DELETE
 	@DeleteMapping(path="libros/{id}")
@@ -86,16 +69,12 @@ public class ControladorLibro {
 	//3. Modificar un libro por ID
 	
 	//PUT
-	//En este caso vamos a hacer una modificación de persona por ID
-	//Para seguir lo que nos marca REST, el ID lo recibiremos en el PATH
-	//y los datos por JSON dentro del bodoy del mensaje HTTP.
-	
 	//Si todo ha ido bien devolvemos el codigo de respuesta de 200 OK,
 	//si id de la persona no existe devolvemos 404 NOT FOUND
 	
 	//La URL para acceder a este metodo sería: 
-	//"http://localhost:8080/personas/ID" y el metodo a usar seria PUT
-	//Pasandole la persona sin el ID dentro del body del HTTP request
+	//"http://localhost:8080/libros/ID" y el metodo a usar seria PUT
+	//Pasandole el libro sin el ID dentro del body del HTTP request
 	@PutMapping(path="libros/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> modificarLibro(
 			@PathVariable("id") int id, 
@@ -114,23 +93,6 @@ public class ControladorLibro {
 	//4. Obtener un libro por ID
 
 	//GET PERSONA POR ID
-	//En este primer ejemplo vamos a configurar endpoint(punto de acceso) para
-	//devolver una persona por ID. Como nos marca REST, al ser una busqueda
-	//por clave primaria, el ID debe ir como parte del PATH de la URL.
-	//Esto lo hacemos por medio del atributo "path="personas/{id}"
-	//Podemos obtener el ID usando la anotacion @PathVariable("id") dentro
-	//de un parametro de entrada. El "id" se corresponde con el "{id}",
-	//es decir, deben de llamarse igual.
-	
-	//Ademas, queremos que el resultado sea JSON. Spring Boot serializara
-	//automaticamente el resultado a json a traves de las librerías Jackson
-	//Esto lo hacemos mediante el atributo "produces". Recordemos que todas
-	//las respuestas van dentro del BODY del mensaje HTTP
-	
-	//Por ultimo, no nos olvidemos que tenemos que responder adecuadamente
-	//con el codigo de respuesta apropieado, segun nos marca el protocolo HTTP.
-	//Para ello usaremos la clase "ResponseEntity" que nos permite encapsular 
-	//tanto el resultado en json como el codigo del mensaje. En este caso 
 	//el codigo 200 "OK" si existe o 404 NOT FOUND si no existe
 	
 	//La URL para acceder a este metodo sería: 
@@ -150,21 +112,10 @@ public class ControladorLibro {
 	//5. Listar todos los libros
 	
 	//GET LISTA PERSONAS
-	//En este caso vamos a pedir todas las personas que tenemos almacenadas
-	//Tambien nos da la opcion de filtrar por nombre si nos pasa un parametro
-	//que se llame "nombre". Mediante la anotacion @RequestParam que pondremos
-	//en un atributo de entrada de tipo String. Con el atributo name="nombre"
-	//establecemos el nombre del parametro y con el atributo required=false
-	//le decimos que no es obligatorio que nos lo envie.
-	//De esta manera si NO me viene el parametro "nombre" devolveremos
-	//toda la lista de personas, en caso de que venga, haremos el filtrado
-	//por dicho nombre.
 	
 	//La URL para acceder a este metodo en caso de querer todas las personas
 	//sería: 
-	//"http://localhost:8080/personas" y el metodo a usar seria GET
-	//Si queremos filtrar por nombre entonces deberemos usar:
-	//"http://localhost:8080/personas?nombre=NOMBRE_A_FILTRAR"
+	//"http://localhost:8080/libros" y el metodo a usar seria GET
 	@GetMapping(path="libros",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Libro>> listaLibros(
 			@RequestParam(name="nombre",required=false) String nombre) {
@@ -179,15 +130,12 @@ public class ControladorLibro {
 	}
 	
 	//PUT
-	//En este caso vamos a hacer una modificación de persona por ID
-	//Para seguir lo que nos marca REST, el ID lo recibiremos en el PATH
-	//y los datos por JSON dentro del bodoy del mensaje HTTP.
-	
+	// Modificar libro
 	//Si todo ha ido bien devolvemos el codigo de respuesta de 200 OK,
 	//si id de la persona no existe devolvemos 404 NOT FOUND
 	
 	//La URL para acceder a este metodo sería: 
-	//"http://localhost:8080/personas/ID" y el metodo a usar seria PUT
+	//"http://localhost:8080/libros/ID" y el metodo a usar seria PUT
 	//Pasandole la persona sin el ID dentro del body del HTTP request
 	@PutMapping(path="personas/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> modificarPersona(
@@ -205,14 +153,14 @@ public class ControladorLibro {
 	}
 	
 	//DELETE
-	//Aqui vamos a borar una persona a traves de un ID que le pasemos en el
+	//Aqui vamos a borar un libro a traves de un ID que le pasemos en el
 	//PATH.
 	
 	//Si todo ha ido bien devolvemos el codigo de respuesta de 200 OK y
 	//devolvemos la persona que hemos borrado
 	
 	//La URL para acceder a este metodo sería: 
-	//"http://localhost:8080/personas/ID" y el metodo a usar seria DELETE
+	//"http://localhost:8080/libro/ID" y el metodo a usar seria DELETE
 	@DeleteMapping(path="personas/{id}")
 	public ResponseEntity<Libro> borrarPersona(@PathVariable("id") int id) {
 		System.out.println("ID a borrar: " + id);
