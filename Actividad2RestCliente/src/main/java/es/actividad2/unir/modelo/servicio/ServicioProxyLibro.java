@@ -11,6 +11,19 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import es.actividad2.unir.modelo.entidad.Libro;
+/**
+ * Clase que actúa como un cliente proxy para interactuar con un servicio REST que gestiona libros.
+ * Proporciona métodos para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en libros
+ * mediante peticiones HTTP al servicio REST correspondiente.
+ * 
+ * <p>Esta clase está anotada con @Service para ser gestionada por el contenedor de Spring como
+ * un servicio.</p>
+ * 
+ * <p>La URL base del servicio REST de libros se define como constante {@link #URL}.</p>
+ * 
+ * @author Alberto Arroyo Santofimia
+ * @version 1.0
+ */
 @Service
 public class ServicioProxyLibro {
 	
@@ -24,6 +37,12 @@ public class ServicioProxyLibro {
 	private RestTemplate restTemplate;
 	
 	//1.Dar de alta un libro
+	/**
+     * Realiza una petición HTTP POST para dar de alta un nuevo libro en el servicio REST.
+     *
+     * @param l El libro a dar de alta.
+     * @return El libro creado, o null si la operación falla.
+     */
 	public Libro alta(Libro l){
 		try {
 			//Para hacer un post de una entidad usamos el metodo postForEntity
@@ -40,7 +59,12 @@ public class ServicioProxyLibro {
 		}
 	}
 	//2.Dar de baja un libro por ID
-	
+	/**
+     * Realiza una petición HTTP DELETE para dar de baja un libro en el servicio REST por su ID.
+     *
+     * @param id El ID del libro a dar de baja.
+     * @return true si el libro se ha dado de baja correctamente, false si la operación falla.
+     */
 	public boolean borrar(int id){
 		try {
 			//El metodo delete tampoco devuelve nada, por lo que si no 
@@ -56,7 +80,12 @@ public class ServicioProxyLibro {
 	}
 	
 	//3.Modificar un libro por ID
-	
+	/**
+     * Realiza una petición HTTP PUT para modificar un libro en el servicio REST por su ID.
+     *
+     * @param l El libro modificado.
+     * @return true si el libro se ha modificado correctamente, false si la operación falla.
+     */
 	public boolean modificar(Libro l){
 		try {
 			//El metodo put de Spring no devuelve nada
@@ -72,7 +101,12 @@ public class ServicioProxyLibro {
 	}
 	
 	//4.Obtener un libro por ID
-	
+	/**
+     * Realiza una petición HTTP GET para obtener un libro en el servicio REST por su ID.
+     *
+     * @param id El ID del libro a obtener.
+     * @return El libro obtenido, o null si la operación falla.
+     */
 	public Libro obtener(int id){
 		try {
 			//Como el servicio trabaja con objetos ResponseEntity, nosotros 
@@ -98,7 +132,12 @@ public class ServicioProxyLibro {
 	}
 	
 	//5.Listar todos los libros
-	
+	/**
+     * Realiza una petición HTTP GET para obtener la lista de libros en el servicio REST.
+     *
+     * @param nombre El nombre opcional para filtrar la lista de libros.
+     * @return La lista de libros obtenida, o null si la operación falla.
+     */
 	public List<Libro> listar(String nombre){
 		String queryParams = "";		
 		if(nombre != null) {

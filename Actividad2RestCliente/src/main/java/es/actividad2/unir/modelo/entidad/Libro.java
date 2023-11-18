@@ -5,7 +5,21 @@ import java.util.Objects;
 import org.springframework.stereotype.Component;
 
 //Javabeans o pojo
-
+/**
+ * Clase que representa un libro en el sistema. Cada libro tiene un identificador único,
+ * un título, una editorial y una valoración.
+ * 
+ * <p>La clase implementa los métodos equals y hashCode basados en el identificador y el título
+ * del libro para facilitar la comparación y el manejo de colecciones.</p>
+ * 
+ * <p>Además, proporciona un método toString que devuelve una representación en cadena del libro.</p>
+ * 
+ * <p>Esta clase está anotada con @Component para ser gestionada por el contenedor de Spring como
+ * un componente.</p>
+ * 
+ * @author Alberto Arroyo Santofimia
+ * @version 1.0
+ */
 @Component
 public class Libro {
 	private int id;
@@ -71,8 +85,5 @@ public class Libro {
 		Libro other = (Libro) obj;
 		return id == other.id && Objects.equals(titulo, other.titulo);
 	}
-	
-	
-	
-	
+		
 }
